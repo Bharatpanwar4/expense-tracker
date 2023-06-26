@@ -3,13 +3,46 @@ import bg from './img/bg.png'
 import { MainLayout } from "./styles/Layouts";
 import Orb from "./components/orbs/Orb";
 import { Navigation } from "./components/Navigation/Navigation";
+import { useMemo, useState } from "react";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Income from "./components/Income/Income";
+import Expenses from "./components/Expenses/Expenses";
+import { useGlobalContext } from "./context/globalContext";
 
 function App() {
+  const [active,setActive]=useState(1)
+const global = useGlobalContext()
+console.log(global);
+
+const displayData = ()=>{
+  switch(active){
+case 1:
+  return <Dashboard/>
+  case 2:
+    return <Dashboard/>
+    case 3:
+      return <Income/>
+      case 4:return <Expenses/>
+
+      default:<Dashboard/>
+
+  }
+}
+
+
+const OrbMemo  =useMemo(()=>{
+  return <Orb/>
+},[])
+
+
   return (
-    <AppStyled className="App">
-    <Orb/>
+    <AppStyled bg={bg} className="App">
+ {OrbMemo}
       <MainLayout>
-<Navigation/>
+<Navigation active={active} setActive={setActive}/>
+<main>
+{displayData()}
+</main>
       </MainLayout>
 
     </AppStyled>
