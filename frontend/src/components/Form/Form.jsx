@@ -35,14 +35,14 @@ export const Form = () => {
         <div className='input-control'>
             <input type='text' value={title}
                 name={'title'}
-                placeholder={'Salery title'}
+                placeholder={'Income title'}
                 onChange={handleInput('title')}
             />
         </div>
         <div className='input-control'>
             <input type='text' value={amount}
                 name={'amount'}
-                placeholder={'Salery amount'}
+                placeholder={'Income amount'}
                 onChange={handleInput('amount')}
             />
         </div>

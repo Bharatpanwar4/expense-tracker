@@ -24,7 +24,7 @@ const Income = () => {
           </div>
           <div className="incomes">
             {incomes.map((income) => {
-              const { _id, title, amount, date, category, description } =
+              const { _id, title, amount, date, category, description,type } =
                 income;
               return (
                 <IncomeItem
@@ -34,6 +34,7 @@ const Income = () => {
                   amount={amount}
                   description={description}
                   date={date}
+                  type={type}
                   category={category}
                   deleteItem={deleteIncome}
                   indicatorColor="var(--color-green)"
