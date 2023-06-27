@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import DatePicker from "react-datepicker"
-import 'react-datepicker/dist/react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import { plus } from '../../utils/Icons';
 import { useGlobalContext } from '../../context/globalContext';
 import Button from '../Button/Button';
 export const Form = () => {
-    const {addIncome} = useGlobalContext()
+    const {addIncome,getIncomes} = useGlobalContext()
     const [inputState,setInputState]=useState({
         title:'',
         amount:'',
@@ -22,6 +22,13 @@ export const Form = () => {
     const handleSubmit = e=>{
         e.preventDefault()
         addIncome(inputState)
+        setInputState({
+            title:'',
+            amount:'',
+            date:'',
+            category:'',
+            description:''
+        })
     }
   return (
     <FormStyled onSubmit={handleSubmit}>

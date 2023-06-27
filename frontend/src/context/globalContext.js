@@ -15,18 +15,37 @@ export const GlobalProvider = ({ children }) => {
       .catch((err) => {
         setError(err.res.data.message);
       });
+    getIncomes();
   };
 
-  const getIncome = async () => {
-    const response = await axios.get(`${BASE_URL}get-incomes`)
-    setIncomes(response.data)
-    console.log(response.data);
-  }
+  const getIncomes = async () => {
+    const response = await axios.get(`${BASE_URL}get-incomes`);
+    setIncomes(response.data);
+  };
 
-  return <GlobalContext.Provider value={{addIncome,getIncome,incomes}}>{children}</GlobalContext.Provider>;
+  const deleteIncome = async (id) => {
+    const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
+    getIncomes();
+  };
+
+  const totalIncome = ()=>{
+    let totalIncome = 0;
+    incomes.forEach((income)=>{
+      totalIncome+=income.amount
+
+    })
+    return totalIncome
+  }
+console.log(totalIncome());
+  return (
+    <GlobalContext.Provider
+      value={{ addIncome, getIncomes, incomes, deleteIncome ,totalIncome}}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
 };
 
-
-export const useGlobalContext = ()=>{
-    return useContext(GlobalContext)
-}
+export const useGlobalContext = () => {
+  return useContext(GlobalContext);
+};
